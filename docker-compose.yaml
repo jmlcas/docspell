@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
 
   restserver:
@@ -86,23 +87,13 @@ services:
 
   solr:
     image: solr:9
-    container_name: docspell-solr
-    restart: unless-stopped
     ports:
-     - "8983:8983"   
+     - "8983:8983"
     volumes:
-      - ./docspell_docker_data_solr:/var/solr      
-    user: root 
-    command:        
-      - bash
-      - -c
-      chown -R 8983:8983 /var/solr    
-      - 'precreate-core docspell; exec solr -f -Dsolr.modules=analysis-extras'      
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8983/solr/docspell/admin/ping"]
-      interval: 1m
-      timeout: 10s
-      retries: 2
-      start_period: 30s
-
-  
+      - data:/var/solr
+    command:
+      - solr-precreate
+      - gettingstarted
+      
+volumes:
+  data:  
