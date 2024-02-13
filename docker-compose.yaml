@@ -96,8 +96,7 @@ services:
     command:        
       - bash
       - -c
-      chown -R 8983:8983 /var/solr
-      && runuser -u solr -- solr-precreate default-core"      
+      chown -R 8983:8983 /var/solr    
       - 'precreate-core docspell; exec solr -f -Dsolr.modules=analysis-extras'      
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8983/solr/docspell/admin/ping"]
