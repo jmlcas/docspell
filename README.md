@@ -1,4 +1,3 @@
 # Docspell
 
-Ver en "localhost:7880"
-
+Ver en "http://localhost:7880"
